@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  objc_development_hw6
+
+  Created by Aleksei Kanatev on 13.02.2020.
+  Copyright © 2020 Aleksei Kanatev. All rights reserved.
+*/
+
+"hello_text" = "Hello!!!";
+"warning" = "Warning";
+"emptyName" = "You didn't enter the name.";
+"incompleteNumber" = "Incomplete number.";
+"addNewContact" = "add";
+"saveContact" = "save";
+"wrongFirstDigit" = "Start with digit 8.";
+"please" = "Please,";
+"name" = "Name";
+"birthDate" = "Date of birth";
+"noPhone" = "Phone number";
+"edit" = "Edit";

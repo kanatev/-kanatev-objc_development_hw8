@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "C45FB8E1-5082-4FC7-87B0-2A0FEC9E469E"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "011784D9-A6E9-4C2E-85E5-1D5882236DCC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "objc_development_hw6/PageView/FirstViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "-nextButtonDidTap:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "011784D9-A6E9-4C2E-85E5-1D5882236DCC - 4c192ca417882b88"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[FirstViewController nextButtonDidTap:]"
+                  moduleName = "objc_development_hw6"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Aleksei_Kanatev/Documents/GeekBrains/2%20%D0%BA%D1%83%D1%80%D1%81/03.%20%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D0%BF%D0%BE%D0%B4%20iOS%20%D0%BD%D0%B0%20obj-c/%D0%A3%D1%80%D0%BE%D0%BA%2007/hw/objc_development_hw6/objc_development_hw6/PageView/FirstViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "384">
+               </Location>
+               <Location
+                  uuid = "011784D9-A6E9-4C2E-85E5-1D5882236DCC - a5470cf0c1fb030"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__40-[FirstViewController nextButtonDidTap:]_block_invoke"
+                  moduleName = "objc_development_hw6"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Aleksei_Kanatev/Documents/GeekBrains/2%20%D0%BA%D1%83%D1%80%D1%81/03.%20%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D0%BF%D0%BE%D0%B4%20iOS%20%D0%BD%D0%B0%20obj-c/%D0%A3%D1%80%D0%BE%D0%BA%2007/hw/objc_development_hw6/objc_development_hw6/PageView/FirstViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "15">
+               </Location>
+               <Location
+                  uuid = "011784D9-A6E9-4C2E-85E5-1D5882236DCC - 99b054a2ddc28572"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_e8_32w"
+                  moduleName = "objc_development_hw6"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Aleksei_Kanatev/Documents/GeekBrains/2%20%D0%BA%D1%83%D1%80%D1%81/03.%20%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D0%BF%D0%BE%D0%B4%20iOS%20%D0%BD%D0%B0%20obj-c/%D0%A3%D1%80%D0%BE%D0%BA%2007/hw/objc_development_hw6/objc_development_hw6/PageView/FirstViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A542FFF0-C432-448B-964A-A53448604455"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "objc_development_hw6/PageView/FirstViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "-createContentDataArray"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B13A4B24-4FE9-411F-B0EA-74DF06D2A877"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "objc_development_hw6/Services/CoreDataService.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "-createPeopleWithName:withPhone:withBirthDate:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7F526487-58E0-42C1-9A84-F837CE6FAD72"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "objc_development_hw6/MakePeopleVC.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "-textChanged:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2B321B67-FE89-44A8-BC5B-3E237B0C769D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "objc_development_hw6/OurCell.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "-setSelected:animated:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7B74F175-45CC-454D-AC3F-C51A74EE7A4C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "objc_development_hw6/OurCell.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "-setSelected:animated:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "90A5649D-C12E-43DB-964A-F5FB8503D01A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "objc_development_hw6/OurCell.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "buttonInCell"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FCF94448-0F47-4991-8F4C-1CC88F189911"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "objc_development_hw6/OurCell.h"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "buttonInCell"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "FCF94448-0F47-4991-8F4C-1CC88F189911 - 9f3f3b77e622182"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[OurCell buttonInCell]"
+                  moduleName = "objc_development_hw6"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Aleksei_Kanatev/Documents/GeekBrains/2%20%D0%BA%D1%83%D1%80%D1%81/03.%20%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D0%BF%D0%BE%D0%B4%20iOS%20%D0%BD%D0%B0%20obj-c/%D0%A3%D1%80%D0%BE%D0%BA%2008/hw/final%20project/BusinessContacts/objc_development_hw6/OurCell.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  uuid = "FCF94448-0F47-4991-8F4C-1CC88F189911 - f75245178833c328"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[OurCell setButtonInCell:]"
+                  moduleName = "objc_development_hw6"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Aleksei_Kanatev/Documents/GeekBrains/2%20%D0%BA%D1%83%D1%80%D1%81/03.%20%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D0%BF%D0%BE%D0%B4%20iOS%20%D0%BD%D0%B0%20obj-c/%D0%A3%D1%80%D0%BE%D0%BA%2008/hw/final%20project/BusinessContacts/objc_development_hw6/OurCell.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "49">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9DAAF394-1B6D-411C-94B8-A5F0BFCE70CD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "objc_development_hw6/OurCell.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "9"
+            endingLineNumber = "9"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
