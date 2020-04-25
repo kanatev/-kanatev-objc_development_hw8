@@ -88,5 +88,49 @@
     }
 }
 
+- (NSString*)maskedNumberFromNumber:(NSNumber *)numberToMask {
+    
+    NSString *numberString = [NSString stringWithFormat:@"%@", numberToMask];
+    NSString *maskedNumberString = @"";
+    
+    NSUInteger len = [numberString length];
+    unichar buffer[len+1];
+    
+    [numberString getCharacters:buffer range:NSMakeRange(0, len)];
+    
+    NSLog(@"getCharacters:range: with unichar buffer");
+    for(int i = 0; i < len; i++) {
+        
+        NSString *tmpStr = [NSString stringWithFormat:@"%C", buffer[i]];
+        NSLog(@"%@", tmpStr);
+        
+        if (i == 0){
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 1) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @" (", tmpStr];
+        } else if (i == 2) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 3) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 4) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @") ", tmpStr];
+        } else if (i == 5) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 6) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 7) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @"-", tmpStr];
+        } else if (i == 8) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 9) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @"-", tmpStr];
+        } else if (i == 10) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        }
+    }
+    NSLog(@"maskedString is %@", maskedNumberString);
+    return maskedNumberString;
+}
+
 @end
 

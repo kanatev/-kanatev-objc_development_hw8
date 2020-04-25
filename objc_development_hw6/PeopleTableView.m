@@ -201,7 +201,6 @@
         } else if (i == 10) {
             maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
         }
-        
     }
     NSLog(@"maskedString is %@", maskedNumberString);
     return maskedNumberString;

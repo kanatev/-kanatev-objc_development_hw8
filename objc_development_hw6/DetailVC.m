@@ -28,8 +28,9 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     if (!self.navigationItem.backBarButtonItem.isEnabled) {
-        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"<" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonTapped)];
-//        [self.navigationItem setBackBarButtonItem:backButton];
+
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemClose target:self action:@selector(backButtonTapped)];
+        
     [self.navigationItem setLeftBarButtonItem:backButton];
     }
     
@@ -81,7 +82,6 @@
 }
 
     -(void)backButtonTapped {
-//        [self.navigationController popToRootViewControllerAnimated:true];
         if (self.navigationController.viewControllers.count == 1) {
             [self dismissViewControllerAnimated:YES completion:nil];
         } else {
@@ -109,10 +109,11 @@
         [self.birthLabel setAttributedText:indentedBirthDateTextEmpty];
         self.birthLabel.textColor = [UIColor lightGrayColor];
     }
-    //
+    
     //    // обновляем инфу в поле - телефон
     if (self.ourPerson.phone != nil) {
-        [self.phoneButton setTitle:[NSString stringWithFormat: @"%@", self.ourPerson.phone] forState:UIControlStateNormal];
+        NSString *maskedNumber = [self maskedNumberFromNumber:self.ourPerson.phone];
+        [self.phoneButton setTitle:[NSString stringWithFormat: @"%@", maskedNumber] forState:UIControlStateNormal];
         [self.phoneButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [self.phoneButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
         [self.phoneButton addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
@@ -129,7 +130,6 @@
     EditVC *editVC = [[EditVC alloc] init];
     editVC.ourPerson = [People new];
     editVC.ourPerson = self.ourPerson;
-    
     [self.navigationController pushViewController:editVC animated:false];
     
 }
@@ -142,6 +142,48 @@
     [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
 }
 
-
+- (NSString*)maskedNumberFromNumber:(NSNumber *)numberToMask {
+    
+    NSString *numberString = [NSString stringWithFormat:@"%@", numberToMask];
+    NSString *maskedNumberString = @"";
+    
+    NSUInteger len = [numberString length];
+    unichar buffer[len+1];
+    
+    [numberString getCharacters:buffer range:NSMakeRange(0, len)];
+    
+    NSLog(@"getCharacters:range: with unichar buffer");
+    for(int i = 0; i < len; i++) {
+        
+        NSString *tmpStr = [NSString stringWithFormat:@"%C", buffer[i]];
+        NSLog(@"%@", tmpStr);
+        
+        if (i == 0){
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 1) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @" (", tmpStr];
+        } else if (i == 2) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 3) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 4) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @") ", tmpStr];
+        } else if (i == 5) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 6) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 7) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @"-", tmpStr];
+        } else if (i == 8) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 9) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @"-", tmpStr];
+        } else if (i == 10) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        }
+    }
+    NSLog(@"maskedString is %@", maskedNumberString);
+    return maskedNumberString;
+}
 
 @end
