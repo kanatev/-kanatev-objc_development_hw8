@@ -166,7 +166,7 @@
     NSNumber *testNumber = [NSNumber numberWithLong: 89191234455];
     
     NSString *numberString = [NSString stringWithFormat:@"%@", testNumber];
-    NSString *maskedNumberString = [NSString new];
+    NSString *maskedNumberString = @"";
     
     //  первый путь
     //    NSString *someString = ...
@@ -195,9 +195,14 @@
     NSLog(@"getCharacters:range: with unichar buffer");
     for(int i = 0; i < len; i++) {
         
-        NSLog(@"%C", buffer[i]);
+        NSString *tmpStr = [NSString stringWithFormat:@"%C", buffer[i]];
+        NSLog(@"%@", tmpStr);
+
+        maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        
     }
-    
+    NSLog(@"maskedString is %@", maskedNumberString);
+
     
     //    for ( i in numberString) {
     //
