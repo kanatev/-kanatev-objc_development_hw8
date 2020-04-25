@@ -26,13 +26,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    
-    if (!self.navigationItem.backBarButtonItem.isEnabled) {
-
+            
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemClose target:self action:@selector(backButtonTapped)];
-        
-    [self.navigationItem setLeftBarButtonItem:backButton];
-    }
+        [self.navigationItem setLeftBarButtonItem:backButton];
+
     
     NSString *locEdit = [NSString localizedStringWithFormat:NSLocalizedString(@"edit", @"")];
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle: locEdit style:UIBarButtonItemStylePlain target:self action:@selector(editButtonTapped)];
@@ -81,13 +78,13 @@
     [self.view addSubview:self.phoneButton];
 }
 
-    -(void)backButtonTapped {
-        if (self.navigationController.viewControllers.count == 1) {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        } else {
-            [self.navigationController popViewControllerAnimated:true];
-        }
+-(void)backButtonTapped {
+    if (self.navigationController.viewControllers.count == 1) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        [self.navigationController popViewControllerAnimated:true];
     }
+}
 
 - (void)viewWillAppear:(BOOL)animated{
     // обновляем инфу в поле - имя
@@ -101,6 +98,7 @@
         NSMutableAttributedString *indentedBirthDateText = [[NSMutableAttributedString alloc] initWithString:birthDateString];
         [indentedBirthDateText addAttribute:NSParagraphStyleAttributeName value:self.style range:self.myNewRange];
         [self.birthLabel setAttributedText:indentedBirthDateText];
+        self.birthLabel.textColor = [UIColor blackColor];
     }
     else {
         NSString *birthDateStringEmpty = [NSString stringWithFormat:@"%@", self.locBirthDate];
@@ -117,6 +115,9 @@
         [self.phoneButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [self.phoneButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
         [self.phoneButton addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
+        if (_phoneButton.enabled == false){
+        self.phoneButton.enabled = true;
+        }
     } else {
         [self.phoneButton setTitle:[NSString stringWithFormat: @"%@", self.locNoPhone]
                           forState:UIControlStateNormal];

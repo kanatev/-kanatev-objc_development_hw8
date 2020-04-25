@@ -16,6 +16,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemClose target:self action:@selector(backButtonTapped)];
+    [self.navigationItem setLeftBarButtonItem:backButton];
+    
     [self.nameField setText:self.ourPerson.name];
     if(self.ourPerson.phone != nil){
         NSString *maskedNumber = [self maskedNumberFromNumber:self.ourPerson.phone];
@@ -31,6 +35,10 @@
     self.phoneField.delegate=self;
     self.nameField.delegate=nil;
     
+}
+
+-(void)backButtonTapped {
+        [self.navigationController popViewControllerAnimated:true];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
