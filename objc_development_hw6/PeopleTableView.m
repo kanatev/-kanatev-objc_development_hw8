@@ -7,18 +7,19 @@
 //
 
 #import "PeopleTableView.h"
+#import "DetailVC.h"
 #import "MakePeopleVC.h"
-#import "CoreDataService.h"
-#import "ResultSearchController.h"
 #import "FirstViewController.h"
 #import "NotificationService.h"
 #import "MyNewCell.h"
+#import "ResultSearchController.h"
+
 
 @interface PeopleTableView () <UISearchResultsUpdating>
 
-@property (nonatomic, strong) UISearchController* searchController;
+//@property (nonatomic, strong) UISearchController* searchController;
 @property (nonatomic, strong) ResultSearchController* resultController;
-- (NSString*)maskedNumberFromNumber:(NSNumber *)numberToMask;
+
 
 @end
 
@@ -26,13 +27,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //    [self maskedNumberFromNumber];
-    
+        
     self.resultController = [[ResultSearchController alloc] init];
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.resultController];
-    [self.searchController setSearchResultsUpdater:self];
-    [self.navigationItem setSearchController:self.searchController];
+    self.searchControllerrr = [[UISearchController alloc] initWithSearchResultsController:self.resultController];
+    [self.searchControllerrr setSearchResultsUpdater:self];
+    [self.navigationItem setSearchController:self.searchControllerrr];
+    
+//    self.searchController.active = false;
+    
     
     NSString *locAddNewContact = [NSString localizedStringWithFormat:NSLocalizedString(@"addNewContact", @"")];
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:locAddNewContact style:UIBarButtonItemStylePlain target:self action:@selector(addButtonTapped)];
@@ -123,9 +125,7 @@
     if (!cell) {
         cell = [[MyNewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     }
-    
-    cell.buttonInCell.button_indexPath = indexPath;
-    
+        
     People *person = [self.people objectAtIndex:indexPath.row];
     [cell.textLabel setText: person.name];
     
@@ -206,5 +206,9 @@
     NSLog(@"maskedString is %@", maskedNumberString);
     return maskedNumberString;
 }
+
+//    - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+//        [super searchBarCancelButtonClicked:searchBar];
+//    }
 
 @end

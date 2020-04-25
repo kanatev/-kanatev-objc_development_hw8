@@ -27,6 +27,12 @@
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
+    if (!self.navigationItem.backBarButtonItem.isEnabled) {
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"<" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonTapped)];
+//        [self.navigationItem setBackBarButtonItem:backButton];
+    [self.navigationItem setLeftBarButtonItem:backButton];
+    }
+    
     NSString *locEdit = [NSString localizedStringWithFormat:NSLocalizedString(@"edit", @"")];
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle: locEdit style:UIBarButtonItemStylePlain target:self action:@selector(editButtonTapped)];
     [self.navigationItem setRightBarButtonItem:editButton];
@@ -73,6 +79,15 @@
     
     [self.view addSubview:self.phoneButton];
 }
+
+    -(void)backButtonTapped {
+//        [self.navigationController popToRootViewControllerAnimated:true];
+        if (self.navigationController.viewControllers.count == 1) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            [self.navigationController popViewControllerAnimated:true];
+        }
+    }
 
 - (void)viewWillAppear:(BOOL)animated{
     // обновляем инфу в поле - имя

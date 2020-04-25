@@ -9,13 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "PeopleTableView.h"
 #import "CoreDataService.h"
+#import "DetailVC.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ResultSearchController : UITableViewController
+@interface ResultSearchController : PeopleTableView
 
 @property (nonatomic, strong) NSMutableArray* results;
-@property (nonatomic, strong) People *myPerson;
+@property (nonatomic, strong) UINavigationController *myNavController;
+//@property (nonatomic, strong) People *myPerson;
 
 -(void)update;
 

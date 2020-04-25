@@ -26,6 +26,7 @@
     }
     self.phoneField.delegate=self;
     self.nameField.delegate=nil;
+    
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{

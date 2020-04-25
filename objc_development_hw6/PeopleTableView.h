@@ -8,15 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "CoreDataService.h"
-#import "DetailVC.h"
+//#import "ResultSearchController.h"
+
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PeopleTableView : UITableViewController
 
+@property (nonatomic, strong) UISearchController* searchControllerrr;
+
 @property (nonatomic, strong) NSArray *people;
 @property (nonatomic, strong) People *myPerson;
+- (NSString*)maskedNumberFromNumber:(NSNumber *)numberToMask;
 
 @end
 
