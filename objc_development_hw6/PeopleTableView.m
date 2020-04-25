@@ -27,6 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self maskedNumberFromNumber];
+    
     self.resultController = [[ResultSearchController alloc] init];
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.resultController];
     [self.searchController setSearchResultsUpdater:self];
@@ -158,6 +160,121 @@
     [self.navigationController pushViewController:detailVC animated:true];
 }
 
+//- (void)maskedNumberFromNumber:(NSNumber *)numberrr {
+- (void)maskedNumberFromNumber{
+
+    NSNumber *testNumber = [NSNumber numberWithLong: 89191234455];
+    
+    NSString *numberString = [NSString stringWithFormat:@"%@", testNumber];
+    NSString *maskedNumberString = [NSString new];
+    
+    //  первый путь
+    //    NSString *someString = ...
+    //
+    //    unsigned int len = [someString length];
+    //    char buffer[len];
+    //
+    //    //This way:
+    //    strncpy(buffer, [someString UTF8String]);
+    //
+    //    //Or this way (preferred):
+    //
+    //    [someString getCharacters:buffer range:NSMakeRange(0, len)];
+    //
+    //    for(int i = 0; i < len; ++i) {
+    //       char current = buffer[i];
+    //       //do something with current...
+    //    }
+    
+    // второй путь
+    NSUInteger len = [numberString length];
+    unichar buffer[len+1];
+    
+    [numberString getCharacters:buffer range:NSMakeRange(0, len)];
+    
+    NSLog(@"getCharacters:range: with unichar buffer");
+    for(int i = 0; i < len; i++) {
+        
+        NSLog(@"%C", buffer[i]);
+    }
+    
+    
+    //    for ( i in numberString) {
+    //
+    //    }
+    
+    //    NSMutableString *strippedString = [NSMutableString
+    //                                       stringWithCapacity:self.previousTextFieldContent.length];
+    //    NSScanner *scanner = [NSScanner scannerWithString:self.previousTextFieldContent];
+    //    NSCharacterSet *numbers = [NSCharacterSet
+    //                               characterSetWithCharactersInString:@"0123456789"];
+    //    while ([scanner isAtEnd] == NO) {
+    //        NSString *buffer;
+    //        if ([scanner scanCharactersFromSet:numbers intoString:&buffer]) {
+    //            [strippedString appendString:buffer];
+    //        } else {
+    //            [scanner setScanLocation:([scanner scanLocation] + 1)];
+    //        }
+    //    }
+    
+    
+    //
+    //    int length = [self getLength:self.phoneField.text];
+    //
+    //    // определяем первый символ в текстовом поле ввода номера
+    //    NSRange rangeFirstChar = NSMakeRange(0, 1);
+    //    NSString *firstChar = [self.phoneField.text substringWithRange:rangeFirstChar];
+    //
+    //    // если первый символ 8, то идем дальше.
+    //    if ([firstChar isEqualToString: @"8"]){
+    //
+    //        if (length == 1) {
+    //            NSString *num = self.phoneField.text;
+    //            self.phoneField.text = [NSString stringWithFormat:@"%@",num];
+    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
+    //
+    //        } else if(length == 2) {
+    //            NSString *num = [self formatNumber:self.phoneField.text];
+    //            self.phoneField.text = [NSString stringWithFormat:@"%@ (%@",self.previousTextFieldContent,[num substringFromIndex:1]];
+    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
+    //        } else if(length == 3) {
+    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
+    //        } else if(length == 4) {
+    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
+    //            NSLog(@"%lu", (unsigned long)self.phoneField.text.length);
+    //        } else if(length == 5) {
+    //            NSString *num = [self formatNumber:self.phoneField.text];
+    //            self.phoneField.text = [NSString stringWithFormat:@"%@) %@", self.previousTextFieldContent,[num substringFromIndex:4]];
+    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
+    //        } else if(length == 6) {
+    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
+    //        } else if(length == 7) {
+    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
+    //        } else if(length == 8) {
+    //            NSString *num = [self formatNumber:self.phoneField.text];
+    //            self.phoneField.text = [NSString stringWithFormat:@"%@-%@", self.previousTextFieldContent, [num substringFromIndex:7]];
+    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
+    //        } else if(length == 9) {
+    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
+    //        } else if(length == 10) {
+    //            NSString *num = [self formatNumber:self.phoneField.text];
+    //            self.phoneField.text = [NSString stringWithFormat:@"%@-%@", self.previousTextFieldContent, [num substringFromIndex:9]];
+    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
+    //        } else if (length >=11) {
+    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
+    //
+    //            NSRange newRange = NSMakeRange(0, 17);
+    //            NSString *newString = [self.previousTextFieldContent substringWithRange:newRange];
+    //            NSLog(@"new string %@", newString);
+    //            self.phoneField.text = newString;
+    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", newString];
+    //            NSLog(@"number is %@", self.previousTextFieldContent);
+    //
+    //            NSString *holderString = [self.phoneField.text stringByReplacingCharactersInRange:newRange withString:newString];
+    //            self.phoneField.text = holderString;
+    
+}
+
 @end
 
-//proverka
+
