@@ -110,7 +110,7 @@
         self.birthLabel.textColor = [UIColor lightGrayColor];
     }
     
-    //    // обновляем инфу в поле - телефон
+    // обновляем инфу в поле - телефон
     if (self.ourPerson.phone != nil) {
         NSString *maskedNumber = [self maskedNumberFromNumber:self.ourPerson.phone];
         [self.phoneButton setTitle:[NSString stringWithFormat: @"%@", maskedNumber] forState:UIControlStateNormal];
@@ -126,7 +126,6 @@
 }
 
 -(void)editButtonTapped {
-    
     EditVC *editVC = [[EditVC alloc] init];
     editVC.ourPerson = [People new];
     editVC.ourPerson = self.ourPerson;

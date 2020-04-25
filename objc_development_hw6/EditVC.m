@@ -18,8 +18,12 @@
     [super viewDidLoad];
     [self.nameField setText:self.ourPerson.name];
     if(self.ourPerson.phone != nil){
-        NSString *tempStr = [NSString stringWithFormat:@"%@", self.ourPerson.phone];
-        [self.phoneField setText:tempStr];
+        NSString *maskedNumber = [self maskedNumberFromNumber:self.ourPerson.phone];
+//        NSString *tempStr = [NSString stringWithFormat:@"%@", self.ourPerson.phone];
+        [self.phoneField setText:maskedNumber];
+        NSLog(@"maskedNumber %lu", (unsigned long)maskedNumber.length);
+        NSLog(@"phoneField %lu", (unsigned long)self.phoneField.text.length);
+
     }
     if(self.ourPerson.birthDate != nil){
         [self.birthDate setText:self.ourPerson.birthDate];
@@ -57,7 +61,7 @@
     //    NSLog(@"formatted number is %@", strippedString);
     //    NSLog(@"length is %lu", (unsigned long)strippedString.length);
     
-    if (self.nameField.hasText && (!self.phoneField.hasText || strippedString.length == 11 || self.phoneField.text.length == 11)) {
+    if (self.nameField.hasText && (!self.phoneField.hasText || strippedString.length == 11 || self.phoneField.text.length == 17)) {
         
         // в случае очистки неполного номера по alert'у чистим strippedString
         // иначе будет сохраняться неполный номер
@@ -70,8 +74,17 @@
         [f setNumberStyle:NSNumberFormatterDecimalStyle];
         NSNumber * myNumber = [f numberFromString:strippedString];
         
+        //---------------------------------------------------------------
+        // если поле пустое, сохраняем пустое значение телефона
         if(myNumber == nil){
-            myNumber = [f numberFromString:self.phoneField.text];
+//            myNumber = [f numberFromString:self.phoneField.text];
+            if (self.phoneField.text.length == 17) {
+                myNumber = self.ourPerson.phone;
+            } else {
+                myNumber = [f numberFromString:@""];
+            }
+            
+            
         }
         
         //        NSLog(@"myNumber is %@", myNumber);
