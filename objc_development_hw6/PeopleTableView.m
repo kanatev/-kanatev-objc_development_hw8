@@ -168,25 +168,6 @@
     NSString *numberString = [NSString stringWithFormat:@"%@", testNumber];
     NSString *maskedNumberString = @"";
     
-    //  первый путь
-    //    NSString *someString = ...
-    //
-    //    unsigned int len = [someString length];
-    //    char buffer[len];
-    //
-    //    //This way:
-    //    strncpy(buffer, [someString UTF8String]);
-    //
-    //    //Or this way (preferred):
-    //
-    //    [someString getCharacters:buffer range:NSMakeRange(0, len)];
-    //
-    //    for(int i = 0; i < len; ++i) {
-    //       char current = buffer[i];
-    //       //do something with current...
-    //    }
-    
-    // второй путь
     NSUInteger len = [numberString length];
     unichar buffer[len+1];
     
@@ -198,7 +179,30 @@
         NSString *tmpStr = [NSString stringWithFormat:@"%C", buffer[i]];
         NSLog(@"%@", tmpStr);
 
-        maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        if (i == 0){
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 1) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @" (", tmpStr];
+        } else if (i == 2) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 3) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 4) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @") ", tmpStr];
+        } else if (i == 5) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 6) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 7) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @"-", tmpStr];
+        } else if (i == 8) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 9) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @"-", tmpStr];
+        } else if (i == 10) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        }
+//        maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
         
     }
     NSLog(@"maskedString is %@", maskedNumberString);
