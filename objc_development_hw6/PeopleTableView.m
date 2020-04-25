@@ -18,7 +18,7 @@
 
 @property (nonatomic, strong) UISearchController* searchController;
 @property (nonatomic, strong) ResultSearchController* resultController;
-
+- (NSString*)maskedNumberFromNumber:(NSNumber *)numberToMask;
 
 @end
 
@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self maskedNumberFromNumber];
+    //    [self maskedNumberFromNumber];
     
     self.resultController = [[ResultSearchController alloc] init];
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.resultController];
@@ -130,16 +130,18 @@
     [cell.textLabel setText: person.name];
     
     if (person.phone != nil && person.birthDate.hash != 0) {
-        [cell.detailTextLabel setText: [NSString stringWithFormat: @"tel: %@, birth date: %@", person.phone, person.birthDate]];
-        //        print(@"%@",person.birthDate.);
+        NSString *maskedNumberForCell = [self maskedNumberFromNumber:person.phone];
+        [cell.detailTextLabel setText: [NSString stringWithFormat: @"tel: %@, birth date: %@", maskedNumberForCell, person.birthDate]];
+        
     } else if (person.phone != nil && person.birthDate.hash == 0){
-        [cell.detailTextLabel setText: [NSString stringWithFormat: @"tel: %@", person.phone]];
+        NSString *maskedNumberForCell = [self maskedNumberFromNumber:person.phone];
+        [cell.detailTextLabel setText: [NSString stringWithFormat: @"tel: %@", maskedNumberForCell]];
+
     } else if (person.phone == nil && person.birthDate.hash != 0) {
         [cell.detailTextLabel setText: [NSString stringWithFormat: @"birth date: %@", person.birthDate]];
     } else {
         [cell.detailTextLabel setText: [NSString stringWithFormat: @"no data"]];
     }
-    
     return cell;
 }
 
@@ -160,12 +162,9 @@
     [self.navigationController pushViewController:detailVC animated:true];
 }
 
-//- (void)maskedNumberFromNumber:(NSNumber *)numberrr {
-- (void)maskedNumberFromNumber{
-
-    NSNumber *testNumber = [NSNumber numberWithLong: 89191234455];
+- (NSString*)maskedNumberFromNumber:(NSNumber *)numberToMask {
     
-    NSString *numberString = [NSString stringWithFormat:@"%@", testNumber];
+    NSString *numberString = [NSString stringWithFormat:@"%@", numberToMask];
     NSString *maskedNumberString = @"";
     
     NSUInteger len = [numberString length];
@@ -178,7 +177,7 @@
         
         NSString *tmpStr = [NSString stringWithFormat:@"%C", buffer[i]];
         NSLog(@"%@", tmpStr);
-
+        
         if (i == 0){
             maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
         } else if (i == 1) {
@@ -202,88 +201,10 @@
         } else if (i == 10) {
             maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
         }
-//        maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
         
     }
     NSLog(@"maskedString is %@", maskedNumberString);
-
-    
-    //    for ( i in numberString) {
-    //
-    //    }
-    
-    //    NSMutableString *strippedString = [NSMutableString
-    //                                       stringWithCapacity:self.previousTextFieldContent.length];
-    //    NSScanner *scanner = [NSScanner scannerWithString:self.previousTextFieldContent];
-    //    NSCharacterSet *numbers = [NSCharacterSet
-    //                               characterSetWithCharactersInString:@"0123456789"];
-    //    while ([scanner isAtEnd] == NO) {
-    //        NSString *buffer;
-    //        if ([scanner scanCharactersFromSet:numbers intoString:&buffer]) {
-    //            [strippedString appendString:buffer];
-    //        } else {
-    //            [scanner setScanLocation:([scanner scanLocation] + 1)];
-    //        }
-    //    }
-    
-    
-    //
-    //    int length = [self getLength:self.phoneField.text];
-    //
-    //    // определяем первый символ в текстовом поле ввода номера
-    //    NSRange rangeFirstChar = NSMakeRange(0, 1);
-    //    NSString *firstChar = [self.phoneField.text substringWithRange:rangeFirstChar];
-    //
-    //    // если первый символ 8, то идем дальше.
-    //    if ([firstChar isEqualToString: @"8"]){
-    //
-    //        if (length == 1) {
-    //            NSString *num = self.phoneField.text;
-    //            self.phoneField.text = [NSString stringWithFormat:@"%@",num];
-    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
-    //
-    //        } else if(length == 2) {
-    //            NSString *num = [self formatNumber:self.phoneField.text];
-    //            self.phoneField.text = [NSString stringWithFormat:@"%@ (%@",self.previousTextFieldContent,[num substringFromIndex:1]];
-    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
-    //        } else if(length == 3) {
-    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
-    //        } else if(length == 4) {
-    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
-    //            NSLog(@"%lu", (unsigned long)self.phoneField.text.length);
-    //        } else if(length == 5) {
-    //            NSString *num = [self formatNumber:self.phoneField.text];
-    //            self.phoneField.text = [NSString stringWithFormat:@"%@) %@", self.previousTextFieldContent,[num substringFromIndex:4]];
-    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
-    //        } else if(length == 6) {
-    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
-    //        } else if(length == 7) {
-    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
-    //        } else if(length == 8) {
-    //            NSString *num = [self formatNumber:self.phoneField.text];
-    //            self.phoneField.text = [NSString stringWithFormat:@"%@-%@", self.previousTextFieldContent, [num substringFromIndex:7]];
-    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
-    //        } else if(length == 9) {
-    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
-    //        } else if(length == 10) {
-    //            NSString *num = [self formatNumber:self.phoneField.text];
-    //            self.phoneField.text = [NSString stringWithFormat:@"%@-%@", self.previousTextFieldContent, [num substringFromIndex:9]];
-    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
-    //        } else if (length >=11) {
-    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
-    //
-    //            NSRange newRange = NSMakeRange(0, 17);
-    //            NSString *newString = [self.previousTextFieldContent substringWithRange:newRange];
-    //            NSLog(@"new string %@", newString);
-    //            self.phoneField.text = newString;
-    //            self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", newString];
-    //            NSLog(@"number is %@", self.previousTextFieldContent);
-    //
-    //            NSString *holderString = [self.phoneField.text stringByReplacingCharactersInRange:newRange withString:newString];
-    //            self.phoneField.text = holderString;
-    
+    return maskedNumberString;
 }
 
 @end
-
-
