@@ -23,10 +23,9 @@
 {
     self = [super init];
     if (self) {
-//        _imageView = [[UIImageView alloc] initWithFrame: CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 100.0, [UIScreen mainScreen].bounds.size.height/2 - 100.0, 200.0, 200.0)];
         
         _imageView = [[UIImageView alloc] initWithFrame: CGRectMake([UIScreen mainScreen].bounds.size.width/2-200.0, [UIScreen mainScreen].bounds.size.height/2-200, 400.0, 400.0)];
-
+        
         [self.view setBackgroundColor:[UIColor lightGrayColor]];
         
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -35,7 +34,7 @@
         [self.view addSubview: _imageView];
         
         _titleLabel = [[UILabel alloc] initWithFrame: CGRectMake([UIScreen mainScreen].bounds.size.width/2 - 100.0, CGRectGetMinY(_imageView.frame)-61.0, 200.0, 21.0)];
-
+        
         _titleLabel.font = [UIFont systemFontOfSize: 20.0 weight: UIFontWeightHeavy];
         _titleLabel.numberOfLines = 0;
         _titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -77,13 +76,9 @@ float heightForText(NSString *text, UIFont *font, float width) {
     _imageView.image = image;
 }
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
-
-
 
 @end

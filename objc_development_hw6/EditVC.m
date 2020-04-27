@@ -25,8 +25,8 @@
         NSString *maskedNumber = [self maskedNumberFromNumber:self.ourPerson.phone];
 //        NSString *tempStr = [NSString stringWithFormat:@"%@", self.ourPerson.phone];
         [self.phoneField setText:maskedNumber];
-        NSLog(@"maskedNumber %lu", (unsigned long)maskedNumber.length);
-        NSLog(@"phoneField %lu", (unsigned long)self.phoneField.text.length);
+//        NSLog(@"maskedNumber %lu", (unsigned long)maskedNumber.length);
+//        NSLog(@"phoneField %lu", (unsigned long)self.phoneField.text.length);
 
     }
     if(self.ourPerson.birthDate != nil){
@@ -111,11 +111,11 @@
     
     [numberString getCharacters:buffer range:NSMakeRange(0, len)];
     
-    NSLog(@"getCharacters:range: with unichar buffer");
+//    NSLog(@"getCharacters:range: with unichar buffer");
     for(int i = 0; i < len; i++) {
         
         NSString *tmpStr = [NSString stringWithFormat:@"%C", buffer[i]];
-        NSLog(@"%@", tmpStr);
+//        NSLog(@"%@", tmpStr);
         
         if (i == 0){
             maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
@@ -141,7 +141,7 @@
             maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
         }
     }
-    NSLog(@"maskedString is %@", maskedNumberString);
+//    NSLog(@"maskedString is %@", maskedNumberString);
     return maskedNumberString;
 }
 

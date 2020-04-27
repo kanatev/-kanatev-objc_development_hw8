@@ -120,7 +120,7 @@
 
 //MyTextField Delegate
 - (void)textFieldDidDelete {
-    NSLog(@"delete");
+//    NSLog(@"delete");
     if([self.phoneField.text length] >0) {
         
         if([self.phoneField.text length] == 1){
@@ -138,7 +138,7 @@
             if ([lastTwoChar rangeOfCharacterFromSet:setOne].location != NSNotFound) {
                 self.phoneField.text = [self.phoneField.text substringWithRange:NSMakeRange(0, [self.phoneField.text length] - 3)];
                 self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
-                NSLog(@"%lu", (unsigned long)[self.phoneField.text length]);
+//                NSLog(@"%lu", (unsigned long)[self.phoneField.text length]);
             }
         }else if([self.phoneField.text length] == 13 || [self.phoneField.text length] == 16 ){
             NSString *lastTwoChar = [self.phoneField.text substringFromIndex: [self.phoneField.text length]-2];
@@ -146,7 +146,7 @@
             if ([lastTwoChar rangeOfCharacterFromSet:setOne].location != NSNotFound) {
                 self.phoneField.text = [self.phoneField.text substringWithRange:NSMakeRange(0, [self.phoneField.text length] - 2)];
                 self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
-                NSLog(@"%lu", (unsigned long)[self.phoneField.text length]);
+//                NSLog(@"%lu", (unsigned long)[self.phoneField.text length]);
             }
         }
         else {
@@ -188,7 +188,7 @@
             self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
         } else if(length == 4) {
             self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", self.phoneField.text];
-            NSLog(@"%lu", (unsigned long)self.phoneField.text.length);
+//            NSLog(@"%lu", (unsigned long)self.phoneField.text.length);
         } else if(length == 5) {
             NSString *num = [self formatNumber:self.phoneField.text];
             self.phoneField.text = [NSString stringWithFormat:@"%@) %@", self.previousTextFieldContent,[num substringFromIndex:4]];
@@ -212,10 +212,10 @@
             
             NSRange newRange = NSMakeRange(0, 17);
             NSString *newString = [self.previousTextFieldContent substringWithRange:newRange];
-            NSLog(@"new string %@", newString);
+//            NSLog(@"new string %@", newString);
             self.phoneField.text = newString;
             self.previousTextFieldContent = [NSMutableString stringWithFormat:@"%@", newString];
-            NSLog(@"number is %@", self.previousTextFieldContent);
+//            NSLog(@"number is %@", self.previousTextFieldContent);
             
             NSString *holderString = [self.phoneField.text stringByReplacingCharactersInRange:newRange withString:newString];
             self.phoneField.text = holderString;
@@ -231,7 +231,7 @@
 
 - (void)textFieldDidBeginEditing:(MyTextField *)textField{
     self.phoneField.text = self.previousTextFieldContent;
-    NSLog(@"did begin editing");
+//    NSLog(@"did begin editing");
 }
 
 -(NSString*)formatNumber:(NSString*)mobileNumber
@@ -276,8 +276,8 @@
             [scanner setScanLocation:([scanner scanLocation] + 1)];
         }
     }
-    NSLog(@"formatted number is %@", strippedString);
-    NSLog(@"length is %lu", (unsigned long)strippedString.length);
+//    NSLog(@"formatted number is %@", strippedString);
+//    NSLog(@"length is %lu", (unsigned long)strippedString.length);
     
     if (self.nameField.hasText && (!self.phoneField.hasText || strippedString.length == 11)) {
         NSNumberFormatter * f = [[NSNumberFormatter alloc] init];

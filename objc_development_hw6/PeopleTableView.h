@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UISearchController* searchControllerrr;
 
-@property (nonatomic, strong) NSArray *people;
+@property (nonatomic, strong) NSMutableArray *people;
 @property (nonatomic, strong) People *myPerson;
 - (NSString*)maskedNumberFromNumber:(NSNumber *)numberToMask;
 

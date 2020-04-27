@@ -17,13 +17,12 @@
 
 -(void)update {
     [self.tableView reloadData];
-    NSLog(@"bla %lu", (unsigned long)[self.results count]);
+//    NSLog(@"%lu", (unsigned long)[self.results count]);
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.searchControllerrr setSearchResultsUpdater:self];
-
 }
 
 
@@ -66,6 +65,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         People *objectToDelete = [self.results objectAtIndex:indexPath.row];
         [[CoreDataService sharedInstance] deletePeopleNamed:objectToDelete];
+        [self.results removeObjectAtIndex:indexPath.row];
         [self update]; 
     }
 }
@@ -76,7 +76,7 @@
     
     DetailVC *detailVC = [[DetailVC alloc] init];
     detailVC.ourPerson = [self.results objectAtIndex:indexPath.row];
-    NSLog(@"%@",detailVC.ourPerson.name);
+//    NSLog(@"%@",detailVC.ourPerson.name);
     self.myNavController = [UINavigationController new];
     [self.myNavController pushViewController:detailVC animated:true];
     [self.myNavController setModalPresentationStyle: UIModalPresentationFullScreen];
