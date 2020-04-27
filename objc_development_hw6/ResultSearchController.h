@@ -17,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray* results;
 @property (nonatomic, strong) UINavigationController *myNavController;
-//@property (nonatomic, strong) People *myPerson;
 
 -(void)update;
 

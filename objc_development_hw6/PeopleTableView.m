@@ -17,7 +17,6 @@
 
 @interface PeopleTableView () <UISearchResultsUpdating>
 
-//@property (nonatomic, strong) UISearchController* searchController;
 @property (nonatomic, strong) ResultSearchController* resultController;
 
 
@@ -33,15 +32,11 @@
     [self.searchControllerrr setSearchResultsUpdater:self];
     [self.navigationItem setSearchController:self.searchControllerrr];
     
-//    self.searchController.active = false;
-    
-    
     NSString *locAddNewContact = [NSString localizedStringWithFormat:NSLocalizedString(@"addNewContact", @"")];
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:locAddNewContact style:UIBarButtonItemStylePlain target:self action:@selector(addButtonTapped)];
     [self.navigationItem setRightBarButtonItem:addButton];
     
     self.people = [[CoreDataService sharedInstance] getAllPeople];
-    
     [self update];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NSManagedObjectContextDidSaveNotification object:nil];
@@ -206,8 +201,5 @@
     return maskedNumberString;
 }
 
-//    - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-//        [super searchBarCancelButtonClicked:searchBar];
-//    }
 
 @end

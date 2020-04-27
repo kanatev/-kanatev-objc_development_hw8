@@ -43,7 +43,6 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     self.phoneField.text = @"";
-    //    NSLog(@"phoneField did begin editing");
 }
 
 -(void)saveButtonTapped {
@@ -62,19 +61,14 @@
     }
     
     if([strippedString isEqual: @""]) {
-        //        NSLog(@"number didn't change");
         [strippedString setString: [NSString stringWithFormat: @"tel: %@", self.ourPerson.phone]];
     }
-    
-    //    NSLog(@"formatted number is %@", strippedString);
-    //    NSLog(@"length is %lu", (unsigned long)strippedString.length);
-    
+
     if (self.nameField.hasText && (!self.phoneField.hasText || strippedString.length == 11 || self.phoneField.text.length == 17)) {
         
         // в случае очистки неполного номера по alert'у чистим strippedString
         // иначе будет сохраняться неполный номер
         if(strippedString.length <11){
-            //        NSLog(@"!!!!!!!!!!myNumber is %@", self.phoneField.text);
             [strippedString setString:@""];
         }
         
@@ -94,9 +88,7 @@
             
             
         }
-        
-        //        NSLog(@"myNumber is %@", myNumber);
-        
+                
         // запись в core data
         [[CoreDataService sharedInstance] editPeopleNamed:self.ourPerson withName:self.nameField.text withPhone:myNumber withBirthDate:self.birthDate.text];
         

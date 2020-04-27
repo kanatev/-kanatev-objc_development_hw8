@@ -17,22 +17,14 @@
 
 -(void)update {
     [self.tableView reloadData];
+    NSLog(@"bla %lu", (unsigned long)[self.results count]);
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonTapped)];
-    //    [self.myNavController.navigationItem setTitle:@"bla"];
+    [self.searchControllerrr setSearchResultsUpdater:self];
+
 }
-
-//-(void)backButtonTapped {
-//    [self.myNavController popToRootViewControllerAnimated:true];
-//}
-
-//To customize the presentation or dismissal of the search results controller, assign an object to the search controller’s delegate property. Delegate objects must conform to the UISearchControllerDelegate protocol. You use the methods of that protocol to be notified when the search controller itself is activated and when the search results controller is presented or dismissed.
-//Note
-//Although a UISearchController object is a view controller, you should never present it directly from your interface. If you want to present the search results interface explicitly, wrap your search controller in a UISearchContainerViewController object and present that object instead.
 
 
 #pragma mark - Table view data source
@@ -56,19 +48,26 @@
         if (person.phone != nil && person.birthDate.hash != 0) {
             NSString *maskedNumberForCell = [self maskedNumberFromNumber:person.phone];
             [cell.detailTextLabel setText: [NSString stringWithFormat: @"tel: %@, birth date: %@", maskedNumberForCell, person.birthDate]];
-            
         } else if (person.phone != nil && person.birthDate.hash == 0){
             NSString *maskedNumberForCell = [self maskedNumberFromNumber:person.phone];
             [cell.detailTextLabel setText: [NSString stringWithFormat: @"tel: %@", maskedNumberForCell]];
-            
         } else if (person.phone == nil && person.birthDate.hash != 0) {
             [cell.detailTextLabel setText: [NSString stringWithFormat: @"birth date: %@", person.birthDate]];
-        } else {
+        } else if (person != nil && person.phone == nil && person.birthDate.hash == 0) {
             [cell.detailTextLabel setText: [NSString stringWithFormat: @"no data"]];
+        } else if (person == nil) {
+            [self update];
         }
     }
-    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        People *objectToDelete = [self.results objectAtIndex:indexPath.row];
+        [[CoreDataService sharedInstance] deletePeopleNamed:objectToDelete];
+        [self update]; 
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -78,29 +77,11 @@
     DetailVC *detailVC = [[DetailVC alloc] init];
     detailVC.ourPerson = [self.results objectAtIndex:indexPath.row];
     NSLog(@"%@",detailVC.ourPerson.name);
-    
     self.myNavController = [UINavigationController new];
-    
-//    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonTapped)];
-//    [self.myNavController.navigationItem setBackBarButtonItem:backButton];
-    
     [self.myNavController pushViewController:detailVC animated:true];
     [self.myNavController setModalPresentationStyle: UIModalPresentationFullScreen];
     
     [self presentViewController:self.myNavController animated:true completion:nil];
-    
 }
-//    -(void)backButtonTapped {
-//        [self.myNavController popToRootViewControllerAnimated:true];
-//    }
-
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    [tableView deselectRowAtIndexPath:indexPath animated:false];
-//
-//    DetailVC *detailVC = [[DetailVC alloc] init];
-//    detailVC.ourPerson = [self.people objectAtIndex:indexPath.row];
-//
-//    [self.navigationController pushViewController:detailVC animated:true];
-//}
 
 @end

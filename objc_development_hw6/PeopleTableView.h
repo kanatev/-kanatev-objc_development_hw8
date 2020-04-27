@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "CoreDataService.h"
-//#import "ResultSearchController.h"
-
 
 
 NS_ASSUME_NONNULL_BEGIN

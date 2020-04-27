@@ -12,9 +12,7 @@
 
 @implementation MyTextField
 
-- (void)deleteBackward {
-    //    [super deleteBackward];
-    
+- (void)deleteBackward {    
     if ([_myDelegate respondsToSelector:@selector(textFieldDidDelete)]){
         [_myDelegate textFieldDidDelete];
     }
