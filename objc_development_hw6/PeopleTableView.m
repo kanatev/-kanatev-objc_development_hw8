@@ -7,16 +7,16 @@
 //
 
 #import "PeopleTableView.h"
+#import "DetailVC.h"
 #import "MakePeopleVC.h"
-#import "CoreDataService.h"
-#import "ResultSearchController.h"
 #import "FirstViewController.h"
 #import "NotificationService.h"
 #import "MyNewCell.h"
+#import "ResultSearchController.h"
+
 
 @interface PeopleTableView () <UISearchResultsUpdating>
 
-@property (nonatomic, strong) UISearchController* searchController;
 @property (nonatomic, strong) ResultSearchController* resultController;
 
 
@@ -28,17 +28,20 @@
     [super viewDidLoad];
     
     self.resultController = [[ResultSearchController alloc] init];
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.resultController];
-    [self.searchController setSearchResultsUpdater:self];
-    [self.navigationItem setSearchController:self.searchController];
+    self.searchControllerrr = [[UISearchController alloc] initWithSearchResultsController:self.resultController];
+    [self.searchControllerrr setSearchResultsUpdater:self];
+    [self.navigationItem setSearchController:self.searchControllerrr];
     
     NSString *locAddNewContact = [NSString localizedStringWithFormat:NSLocalizedString(@"addNewContact", @"")];
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:locAddNewContact style:UIBarButtonItemStylePlain target:self action:@selector(addButtonTapped)];
     [self.navigationItem setRightBarButtonItem:addButton];
     
-    self.people = [[CoreDataService sharedInstance] getAllPeople];
+    NSMutableArray *tmpArray = [NSMutableArray new];
+    [tmpArray addObjectsFromArray: [[CoreDataService sharedInstance] getAllPeople]];
+    self.people = tmpArray;
     
-    [self update];
+    
+    //    [self update];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NSManagedObjectContextDidSaveNotification object:nil];
 }
@@ -77,7 +80,10 @@
 }
 
 -(void)update{
-    self.people = [[CoreDataService sharedInstance] getAllPeople];
+    NSMutableArray *tmpArray = [NSMutableArray new];
+    [tmpArray addObjectsFromArray: [[CoreDataService sharedInstance] getAllPeople]];
+    self.people = tmpArray;
+    
     [self.tableView reloadData];
     
     for (People *p in self.people) {
@@ -87,8 +93,8 @@
             [dateFormatter setDateFormat:@"dd.MM.yyyy"];
             NSDate *birthDateAsDate = [dateFormatter dateFromString:p.birthDate];
             NSDate *currentDate = [NSDate date];
-            NSLog(@"birth %@", birthDateAsDate);
-            NSLog(@"current %@", currentDate);
+//            NSLog(@"birth %@", birthDateAsDate);
+//            NSLog(@"current %@", currentDate);
             
             NSString *birthDateString = [dateFormatter stringFromDate:birthDateAsDate];
             NSString *currentDateString = [dateFormatter stringFromDate:currentDate];
@@ -97,8 +103,8 @@
             NSMutableString *currentDateStringShort = [NSMutableString stringWithFormat:@"%@", currentDateString];
             [birthDateStringShort deleteCharactersInRange: NSMakeRange(5, 5)];
             [currentDateStringShort deleteCharactersInRange: NSMakeRange(5, 5)];
-            NSLog(@"birth %@", birthDateStringShort);
-            NSLog(@"current %@", currentDateStringShort);
+//            NSLog(@"birth %@", birthDateStringShort);
+//            NSLog(@"current %@", currentDateStringShort);
             
             if ([birthDateStringShort isEqualToString:currentDateStringShort]) {
                 NSString *congrats = [NSString stringWithFormat: @"Поздравьте контакт '%@' с днем рождения", p.name];
@@ -122,22 +128,22 @@
         cell = [[MyNewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
     }
     
-    cell.buttonInCell.button_indexPath = indexPath;
-    
     People *person = [self.people objectAtIndex:indexPath.row];
     [cell.textLabel setText: person.name];
     
     if (person.phone != nil && person.birthDate.hash != 0) {
-        [cell.detailTextLabel setText: [NSString stringWithFormat: @"tel: %@, birth date: %@", person.phone, person.birthDate]];
-        //        print(@"%@",person.birthDate.);
+        NSString *maskedNumberForCell = [self maskedNumberFromNumber:person.phone];
+        [cell.detailTextLabel setText: [NSString stringWithFormat: @"tel: %@, birth date: %@", maskedNumberForCell, person.birthDate]];
+        
     } else if (person.phone != nil && person.birthDate.hash == 0){
-        [cell.detailTextLabel setText: [NSString stringWithFormat: @"tel: %@", person.phone]];
+        NSString *maskedNumberForCell = [self maskedNumberFromNumber:person.phone];
+        [cell.detailTextLabel setText: [NSString stringWithFormat: @"tel: %@", maskedNumberForCell]];
+        
     } else if (person.phone == nil && person.birthDate.hash != 0) {
         [cell.detailTextLabel setText: [NSString stringWithFormat: @"birth date: %@", person.birthDate]];
     } else {
         [cell.detailTextLabel setText: [NSString stringWithFormat: @"no data"]];
     }
-    
     return cell;
 }
 
@@ -145,6 +151,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         People *objectToDelete = [self.people objectAtIndex:indexPath.row];
         [[CoreDataService sharedInstance] deletePeopleNamed:objectToDelete];
+        //        [self.people removeObjectAtIndex:indexPath.row];
         [self update];
     }
 }
@@ -158,6 +165,49 @@
     [self.navigationController pushViewController:detailVC animated:true];
 }
 
-@end
+- (NSString*)maskedNumberFromNumber:(NSNumber *)numberToMask {
+    
+    NSString *numberString = [NSString stringWithFormat:@"%@", numberToMask];
+    NSString *maskedNumberString = @"";
+    
+    NSUInteger len = [numberString length];
+    unichar buffer[len+1];
+    
+    [numberString getCharacters:buffer range:NSMakeRange(0, len)];
+    
+//    NSLog(@"getCharacters:range: with unichar buffer");
+    for(int i = 0; i < len; i++) {
+        
+        NSString *tmpStr = [NSString stringWithFormat:@"%C", buffer[i]];
+//        NSLog(@"%@", tmpStr);
+        
+        if (i == 0){
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 1) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @" (", tmpStr];
+        } else if (i == 2) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 3) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 4) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @") ", tmpStr];
+        } else if (i == 5) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 6) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 7) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @"-", tmpStr];
+        } else if (i == 8) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 9) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @"-", tmpStr];
+        } else if (i == 10) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        }
+    }
+//    NSLog(@"maskedString is %@", maskedNumberString);
+    return maskedNumberString;
+}
 
-//proverka
+
+@end

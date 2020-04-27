@@ -75,7 +75,8 @@ struct firstContentData {
 
 -(void)nextButtonDidTap:(UIButton*)sender {
     int index = ((ContentViewController*)[self.viewControllers firstObject]).index;
-    if (sender.tag){
+    //    if (sender.tag){
+    if (index == 3){
         [[NSUserDefaults standardUserDefaults] setBool: YES forKey:@"first_start"];
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
@@ -86,6 +87,7 @@ struct firstContentData {
         }];
     }
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

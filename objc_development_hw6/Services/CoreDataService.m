@@ -60,14 +60,17 @@
     [self save];
 }
 
--(NSArray*)getAllPeople{
+-(NSMutableArray*)getAllPeople{
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"People"];
     NSError *error;
     NSArray *results = [self.context executeFetchRequest:request error:&error];
+//    NSMutableArray *mutableResults = [results mutableCopy];
+    NSMutableArray *mutableResults  = [NSMutableArray arrayWithArray:results];
+
     if (error && !results) {
         NSLog(@"Error fetching.");
     }
-    return results;
+    return mutableResults;
 }
 
 

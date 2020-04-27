@@ -26,6 +26,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
+            
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemClose target:self action:@selector(backButtonTapped)];
+        [self.navigationItem setLeftBarButtonItem:backButton];
+
     
     NSString *locEdit = [NSString localizedStringWithFormat:NSLocalizedString(@"edit", @"")];
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle: locEdit style:UIBarButtonItemStylePlain target:self action:@selector(editButtonTapped)];
@@ -74,6 +78,14 @@
     [self.view addSubview:self.phoneButton];
 }
 
+-(void)backButtonTapped {
+    if (self.navigationController.viewControllers.count == 1) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        [self.navigationController popViewControllerAnimated:true];
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     // обновляем инфу в поле - имя
     self.indentedNameText = [[NSMutableAttributedString alloc] initWithString:self.ourPerson.name];
@@ -86,6 +98,7 @@
         NSMutableAttributedString *indentedBirthDateText = [[NSMutableAttributedString alloc] initWithString:birthDateString];
         [indentedBirthDateText addAttribute:NSParagraphStyleAttributeName value:self.style range:self.myNewRange];
         [self.birthLabel setAttributedText:indentedBirthDateText];
+        self.birthLabel.textColor = [UIColor blackColor];
     }
     else {
         NSString *birthDateStringEmpty = [NSString stringWithFormat:@"%@", self.locBirthDate];
@@ -94,13 +107,17 @@
         [self.birthLabel setAttributedText:indentedBirthDateTextEmpty];
         self.birthLabel.textColor = [UIColor lightGrayColor];
     }
-    //
-    //    // обновляем инфу в поле - телефон
+    
+    // обновляем инфу в поле - телефон
     if (self.ourPerson.phone != nil) {
-        [self.phoneButton setTitle:[NSString stringWithFormat: @"%@", self.ourPerson.phone] forState:UIControlStateNormal];
+        NSString *maskedNumber = [self maskedNumberFromNumber:self.ourPerson.phone];
+        [self.phoneButton setTitle:[NSString stringWithFormat: @"%@", maskedNumber] forState:UIControlStateNormal];
         [self.phoneButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [self.phoneButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
         [self.phoneButton addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
+        if (_phoneButton.enabled == false){
+        self.phoneButton.enabled = true;
+        }
     } else {
         [self.phoneButton setTitle:[NSString stringWithFormat: @"%@", self.locNoPhone]
                           forState:UIControlStateNormal];
@@ -110,11 +127,9 @@
 }
 
 -(void)editButtonTapped {
-    
     EditVC *editVC = [[EditVC alloc] init];
     editVC.ourPerson = [People new];
     editVC.ourPerson = self.ourPerson;
-    
     [self.navigationController pushViewController:editVC animated:false];
     
 }
@@ -127,6 +142,48 @@
     [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
 }
 
-
+- (NSString*)maskedNumberFromNumber:(NSNumber *)numberToMask {
+    
+    NSString *numberString = [NSString stringWithFormat:@"%@", numberToMask];
+    NSString *maskedNumberString = @"";
+    
+    NSUInteger len = [numberString length];
+    unichar buffer[len+1];
+    
+    [numberString getCharacters:buffer range:NSMakeRange(0, len)];
+    
+//    NSLog(@"getCharacters:range: with unichar buffer");
+    for(int i = 0; i < len; i++) {
+        
+        NSString *tmpStr = [NSString stringWithFormat:@"%C", buffer[i]];
+//        NSLog(@"%@", tmpStr);
+        
+        if (i == 0){
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 1) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @" (", tmpStr];
+        } else if (i == 2) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 3) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 4) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @") ", tmpStr];
+        } else if (i == 5) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 6) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 7) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @"-", tmpStr];
+        } else if (i == 8) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        } else if (i == 9) {
+            maskedNumberString = [maskedNumberString stringByAppendingFormat:@"%@%@", @"-", tmpStr];
+        } else if (i == 10) {
+            maskedNumberString = [maskedNumberString stringByAppendingString: tmpStr];
+        }
+    }
+//    NSLog(@"maskedString is %@", maskedNumberString);
+    return maskedNumberString;
+}
 
 @end
